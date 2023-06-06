@@ -11,31 +11,23 @@
     <form>
         <div>
             NAMA
-                <input type="text" id="txNAMA">
+                <input type="text" id="txNAMA" disabled>
         </div>
         
         <div>
             EMAIL
-                <input type="text" id="txEMAIL">
+                <input type="text" id="txEMAIL" disabled>
         </div>
 
         <div>
             USER NAME
-                <input type="text" id="txUSERNAME">
-        </div>
-
-        <div>
-            PASSWORD
-                <input type="password" id="txPASS1">
-        </div>
-        <div>
-             Verifikasi PASSWORD
-                <input type="password" id="txPASS2">
+                <input type="text" id="txUSERNAME" disabled>
         </div>
         <div id = "tombol">
-            <button type="button" id onclick="UpdateData()">Ubah Data</button>
+            <button type="button" onclick="DeleteData()">Hapus Data</button>
         </div>
-       
+
+    
     </form>
 
     <script>
@@ -44,7 +36,7 @@
         let idp = urlP.get("id");
         if(idp==null) location.href = "latihan01.html";
 
-        let cx="https://webpro.ptov.my.id/api/curduser.php?aksi=Edit"+idp;
+        let cx="https://webpro.ptov.my.id/api/curduser.php?aksi=destroy";
         const bacadta = new XMLHttpRequest();
         bacadta.open("GET",cx);
         bacadta.send();
@@ -58,12 +50,7 @@
             console.log(dta);
         }
         function UpdateData(){
-            let nm = document.getElementById("txNAMA").value;
-            let ema = document.getElementById("txEMAIL").value;
-            let usr = document.getElementById("txUSERNAME").value;
-            let p1 = document.getElementById("txPASS1").value;
-            let p2 = document.getElementById("txPASS2").value;
-            let params = "iduser="+idp+"&nama="+nm+"&email="+ema+"&username="+usr+"&pass1="+p1+"&pass2="+p2;
+            let params = "iduser="+idp;
 
             bacadta.onload = function(){
                 const dta = JSON.parse(this.responseText);
@@ -73,7 +60,7 @@
                     setTimeout("window.location.href='latihan01.html'",2000);
                 }
             }
-            let cx="https://webpro.ptov.my.id/api/curduser.php?aksi=Edit";
+            let cx="https://webpro.ptov.my.id/api/curduser.php?aksi=destroy";
             bacadta.open("POST",cx,true);
             bacadta.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             bacadta.send(params);
